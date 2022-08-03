@@ -23,9 +23,12 @@ func run() error {
 	}
 
 	productRepository := repository.NewProductRepository(db)
-	productFeature := features.NewProductFeature(productRepository)
+	saleRepository := repository.NewSaleRepository(db)
 
-	srv := server.NewServer(cfg, productFeature)
+	productFeature := features.NewProductFeature(productRepository)
+	saleFeature := features.NewSaleFeature(saleRepository)
+
+	srv := server.NewServer(cfg, productFeature, saleFeature)
 
 	return srv.Run()
 

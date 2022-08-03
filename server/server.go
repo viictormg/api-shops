@@ -10,12 +10,14 @@ import (
 type Server struct {
 	cfg     *config.Config
 	product features.ProductFeature
+	sale    features.SaleFeature
 }
 
-func NewServer(cfg *config.Config, product features.ProductFeature) *Server {
+func NewServer(cfg *config.Config, product features.ProductFeature, sale features.SaleFeature) *Server {
 	return &Server{
 		cfg:     cfg,
 		product: product,
+		sale:    sale,
 	}
 }
 

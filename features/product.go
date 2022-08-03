@@ -17,3 +17,7 @@ func NewProductFeature(product models.ProductRepository) ProductFeature {
 func (feat ProductFeature) GetProducts() ([]models.Product, error) {
 	return feat.product.GetProducts()
 }
+
+func (feat ProductFeature) GetProductByID(id string) (models.Product, error) {
+	return feat.product.GetProductID(id)
+}
