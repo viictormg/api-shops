@@ -4,29 +4,39 @@ import (
 	"api-shops/models"
 )
 
-type SaleFeature struct {
-	sale models.SaleRepository
-}
-
-func NewSaleFeature(sale models.SaleRepository) SaleFeature {
-	return SaleFeature{
-		sale: sale,
+func (feat Feature) CreateSale(sale models.Sale) error {
+	err := feat.GetPriceProducts(&sale)
+	if err != nil {
+		return err
 	}
+
+	id, err := feat.db.CreateSale(sale)
+
+	if err != nil {
+		return err
+	}
+	err = feat.db.CreateDetailSale(id, sale.Products)
+
+	return err
 }
 
-func (feat SaleFeature) CreateSale(sale models.Sale) error {
+func (feat Feature) GetPriceProducts(sale *models.Sale) error {
+	var total int
+	for i, item := range sale.Products {
+		product, err := feat.GetProductByID(item.ID)
 
-	sale.Total = feat.GetTotalSale(&sale)
-	return feat.sale.CreateSale()
-}
-
-func (feat SaleFeature) GetTotalSale(sale *models.Sale) int {
-	// products := NewProductFeature()
-
-	// var total int
-	// for i, item := range sale.Products{
-	// 	sale[i] =
-	// }
-
-	return 1
+		if err != nil {
+			return err
+		}
+		subtotal := item.Quantity * product.Price
+		sale.Products[i] = models.Product{
+			ID:       item.ID,
+			Price:    product.Price,
+			Quantity: item.Quantity,
+			Subtotal: subtotal,
+		}
+		total += subtotal
+	}
+	sale.Total = total
+	return nil
 }
