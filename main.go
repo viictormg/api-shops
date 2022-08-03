@@ -22,13 +22,11 @@ func run() error {
 		return err
 	}
 
-	productRepository := repository.NewProductRepository(db)
-	saleRepository := repository.NewSaleRepository(db)
+	Repository := repository.NewRepository(db)
 
-	productFeature := features.NewProductFeature(productRepository)
-	saleFeature := features.NewSaleFeature(saleRepository)
+	Feature := features.NewFeature(Repository)
 
-	srv := server.NewServer(cfg, productFeature, saleFeature)
+	srv := server.NewServer(cfg, Feature)
 
 	return srv.Run()
 

@@ -4,20 +4,10 @@ import (
 	"api-shops/models"
 )
 
-type ProductFeature struct {
-	product models.ProductRepository
+func (feat Feature) GetProducts() ([]models.Product, error) {
+	return feat.db.GetProducts()
 }
 
-func NewProductFeature(product models.ProductRepository) ProductFeature {
-	return ProductFeature{
-		product: product,
-	}
-}
-
-func (feat ProductFeature) GetProducts() ([]models.Product, error) {
-	return feat.product.GetProducts()
-}
-
-func (feat ProductFeature) GetProductByID(id string) (models.Product, error) {
-	return feat.product.GetProductID(id)
+func (feat Feature) GetProductByID(id string) (models.Product, error) {
+	return feat.db.GetProductID(id)
 }

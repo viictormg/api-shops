@@ -2,14 +2,7 @@ package repository
 
 import (
 	"api-shops/models"
-	"database/sql"
 )
-
-func NewProductRepository(db *sql.DB) models.ProductRepository {
-	return Repository{
-		db: db,
-	}
-}
 
 func (r Repository) GetProducts() ([]models.Product, error) {
 	var products []models.Product
