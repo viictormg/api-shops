@@ -7,7 +7,8 @@ func (s Server) GetProduct(ctx *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	return ctx.Status(fiber.StatusOK).JSON(products)
+
+	return ctx.JSON(products)
 
 }
 

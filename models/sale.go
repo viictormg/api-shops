@@ -10,3 +10,13 @@ type Sale struct {
 	Total      int
 	IDShop     string `json:"idShop"`
 }
+
+type Response struct {
+	Success bool   `json:"success"`
+	Message string `json:"message"`
+}
+
+type RequestSavePoints struct {
+	IdCustomer string `json:"idCustomer"`
+	Amount     int    `json: "amount"`
+}

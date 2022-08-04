@@ -20,5 +20,8 @@ func (s Server) CreateSale(ctx *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	return ctx.Status(fiber.StatusOK).SendString("venta creada")
+	return ctx.Status(fiber.StatusOK).JSON(models.Response{
+		Success: true,
+		Message: "venta creada con exito",
+	})
 }

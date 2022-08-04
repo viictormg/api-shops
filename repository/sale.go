@@ -2,7 +2,6 @@ package repository
 
 import (
 	"api-shops/models"
-	"fmt"
 
 	"github.com/google/uuid"
 )
@@ -29,9 +28,6 @@ func (r Repository) CreateSale(sale models.Sale) (string, error) {
 
 func (r Repository) CreateDetailSale(id string, products []models.Product) error {
 	for _, detail := range products {
-
-		fmt.Println(detail)
-		fmt.Println(id)
 
 		query := `INSERT INTO sale_detail (id, IDproduct, subtotal, quantity, IDSale) 
 				VALUES(UUID(), ?, ?, ?, ?)
